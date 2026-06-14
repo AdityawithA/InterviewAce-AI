@@ -3,10 +3,7 @@
 -- InterviewAce AI Database
 -- =====================================================
 
-DROP DATABASE IF EXISTS interviewace_ai;
-CREATE DATABASE interviewace_ai;
 
-USE interviewace_ai;
 
 -- =====================================================
 -- USERS TABLE
@@ -19,8 +16,8 @@ CREATE TABLE users (
     password VARCHAR(255) NOT NULL,
     profile_picture VARCHAR(255) DEFAULT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    ON UPDATE CURRENT_TIMESTAMP
+    updated_at TIMESTAMP NULL
+    
 );
 
 -- =====================================================
@@ -121,8 +118,8 @@ CREATE TABLE user_statistics (
     total_interviews INT DEFAULT 0,
     highest_score INT DEFAULT 0,
     average_score DECIMAL(5,2) DEFAULT 0.00,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    ON UPDATE CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NULL,
+    
 
     FOREIGN KEY (user_id)
     REFERENCES users(id)

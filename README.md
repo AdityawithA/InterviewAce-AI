@@ -1,99 +1,125 @@
-````md
 # 🚀 InterviewAce AI
 
-An AI-Powered Mock Interview Platform built with Flask, MySQL, JavaScript, HTML, and CSS that helps users practice technical and HR interviews, receive AI-generated feedback, track performance, and improve interview skills.
+An AI-powered interview preparation platform that helps users practice interviews, receive intelligent feedback, and improve their performance through personalized reports generated using Google Gemini AI.
 
 ---
 
-## 📌 Features
+## 🌐 Live Demo
 
-### 🤖 AI Mock Interviews
-- Generate role-based interview questions
-- Technical and HR interview support
-- Multiple difficulty levels
-- Dynamic question flow
+**Live Application:** https://interviewace-ai-3ra7.onrender.com
 
-### 🎤 Voice-to-Text Support
-- Speech recognition integration
-- Real-time answer transcription
-- Hands-free interview experience
-
-### 📊 Performance Analytics
-- Interview score calculation
-- Performance trends
-- Role-wise statistics
-- Interactive charts and reports
-
-### 📝 AI Feedback System
-- Question-wise evaluation
-- Strength analysis
-- Weakness identification
-- Personalized recommendations
-
-### 👤 User Management
-- Secure Registration/Login
-- Profile Management
-- Password Update
-- Resume Upload
-
-### 📚 Interview History
-- Track previous interviews
-- Review past performance
-- Access generated reports
-- Delete old sessions
+**GitHub Repository:** https://github.com/AdityawithA/InterviewAce-AI
 
 ---
 
-# 🛠 Tech Stack
+## 📌 Overview
 
-## Frontend
-- HTML5
-- CSS3
-- JavaScript
-- Chart.js
-- Font Awesome
+InterviewAce AI is a full-stack web application designed to simulate real-world interview experiences. Users can select a job role and difficulty level, answer AI-generated interview questions, and receive detailed performance analysis with strengths, weaknesses, and improvement suggestions.
 
-## Backend
-- Flask
-- Python
-
-## Database
-- MySQL
-
-## Authentication
-- Flask Session
-- Password Hashing
-
-## AI Features
-- OpenAI API Integration
-- Speech Recognition API
+The platform uses Google Gemini AI to evaluate responses and generate personalized interview reports.
 
 ---
 
-# 📂 Project Structure
+## ✨ Features
 
-```text
-InterviewAceAI/
+### 🔐 User Authentication
 
-│
-├── app.py
-├── config.py
-├── requirements.txt
-├── database.sql
-├── .env.example
+* User Registration
+* Secure Login System
+* Session Management
+* Profile Management
+
+### 🤖 AI-Powered Interviews
+
+* HR Interview
+* Frontend Developer Interview
+* Backend Developer Interview
+* Full Stack Developer Interview
+* Data Analyst Interview
+* Machine Learning Engineer Interview
+
+### 📊 Intelligent Evaluation
+
+* AI-generated interview questions
+* Detailed answer analysis
+* Question-wise scoring
+* Personalized feedback
+
+### 📈 Performance Reports
+
+* Overall interview score
+* Strength analysis
+* Weakness analysis
+* Improvement recommendations
+* Question-wise feedback report
+
+### 📂 Resume Support
+
+* Resume upload functionality
+* PDF resume processing
+* Resume-based interview customization
+
+### 📜 Interview History
+
+* View previous interviews
+* Access past reports
+* Track performance growth
+
+### 👤 User Dashboard
+
+* Performance statistics
+* Highest score tracking
+* Average score monitoring
+* Interview history overview
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+
+* HTML5
+* CSS3
+* JavaScript
+* Jinja2 Templates
+
+### Backend
+
+* Python
+* Flask
+
+### Database
+
+* MySQL
+
+### AI Integration
+
+* Google Gemini AI
+
+### Deployment
+
+* Render
+
+### Additional Libraries
+
+* Flask-WTF
+* mysql-connector-python
+* PyPDF2
+* ReportLab
+* python-dotenv
+* Requests
+
+---
+
+## 📁 Project Structure
+
+```bash
+InterviewAce-AI/
 │
 ├── static/
 │   ├── css/
-│   │   ├── style.css
-│   │   ├── dashboard.css
-│   │   └── interview.css
-│   │
 │   ├── js/
-│   │   ├── auth.js
-│   │   ├── dashboard.js
-│   │   └── interview.js
-│   │
-│   └── images/
+│   ├── uploads/
 │
 ├── templates/
 │   ├── index.html
@@ -101,103 +127,90 @@ InterviewAceAI/
 │   ├── register.html
 │   ├── dashboard.html
 │   ├── interview.html
+│   ├── report.html
 │   ├── history.html
-│   ├── profile.html
-│   └── report.html
+│   └── profile.html
 │
+├── app.py
+├── config.py
+├── requirements.txt
+├── Procfile
+├── runtime.txt
+├── .env
 └── README.md
-````
-
----
-
-# ⚙️ Installation
-
-## Clone Repository
-
-```bash
-git clone https://github.com/yourusername/InterviewAceAI.git
-
-cd InterviewAceAI
 ```
 
 ---
 
-## Create Virtual Environment
+## ⚙️ Installation
 
-### Windows
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/AdityawithA/InterviewAce-AI.git
+cd InterviewAce-AI
+```
+
+### 2. Create Virtual Environment
 
 ```bash
 python -m venv venv
+```
 
+### 3. Activate Virtual Environment
+
+#### Windows
+
+```bash
 venv\Scripts\activate
 ```
 
-### Linux / Mac
+#### Linux/Mac
 
 ```bash
-python3 -m venv venv
-
 source venv/bin/activate
 ```
 
----
-
-## Install Dependencies
+### 4. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
----
+### 5. Configure Environment Variables
 
-## Create Database
-
-Import:
-
-```sql
-database.sql
-```
-
-into MySQL.
-
-Create:
-
-```sql
-CREATE DATABASE interviewace_ai;
-```
-
----
-
-## Configure Environment
-
-Create:
-
-```env
-.env
-```
-
-using:
+Create a `.env` file:
 
 ```env
 SECRET_KEY=your_secret_key
 
-MYSQL_HOST=localhost
-MYSQL_USER=root
+MYSQL_HOST=your_host
+MYSQL_PORT=3306
+MYSQL_USER=your_username
 MYSQL_PASSWORD=your_password
-MYSQL_DB=interviewace_ai
+MYSQL_DATABASE=your_database
 
-OPENAI_API_KEY=your_api_key
+GEMINI_API_KEY=your_gemini_api_key
+
+MAIL_SERVER=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USERNAME=your_email@gmail.com
+MAIL_PASSWORD=your_app_password
+MAIL_USE_TLS=True
+MAIL_USE_SSL=False
 ```
 
----
+### 6. Import Database
 
-## Run Application
+Import the provided SQL file into your MySQL database.
+
+### 7. Run the Application
 
 ```bash
 python app.py
 ```
 
-Server:
+Visit:
 
 ```text
 http://127.0.0.1:5000
@@ -205,114 +218,48 @@ http://127.0.0.1:5000
 
 ---
 
-# 📊 Main Modules
 
-### Authentication
 
-* Register
-* Login
-* Logout
+## 🔒 Security Features
 
-### Dashboard
-
-* Statistics
-* Charts
-* Interview Creation
-
-### Interview Engine
-
-* Dynamic Questions
-* Voice Recognition
-* Answer Saving
-* Progress Tracking
-
-### Evaluation System
-
-* AI Feedback
-* Scoring System
-* Report Generation
-
-### User Profile
-
-* Resume Upload
-* Password Update
-* Account Management
+* Password hashing
+* Session protection
+* Environment variable configuration
+* Secure database credentials
+* File upload validation
 
 ---
 
-# 🔐 Security Features
+## 🚀 Future Enhancements
 
-* Password Hashing
-* Session Management
-* Environment Variables
-* SQL Injection Prevention
-* Form Validation
+* Voice-based interviews
+* Video interview simulation
+* Resume-to-interview generation
+* AI career guidance
+* Leaderboards and achievements
+* Multi-language support
+* Export reports as PDF
 
 ---
 
-# 📸 Screenshots
+## 👨‍💻 Author
 
-Add screenshots here:
+**Aditya Kumar**
 
-```text
-Landing Page
+GitHub: https://github.com/AdityawithA
 
-Dashboard
+---
 
-Interview Screen
+## ⭐ Support
 
-Performance Report
+If you found this project useful, consider giving it a star on GitHub.
 
-Profile Page
+```bash
+⭐ Star this repository
 ```
 
 ---
 
-# 🚀 Future Improvements
+## 📄 License
 
-* Video Interview Support
-* Real-time AI Interviewer
-* Resume Analysis
-* Company-specific Interview Sets
-* AI Career Guidance
-* Multi-language Support
-* Interview Recording Playback
-
----
-
-# 🤝 Contributing
-
-Pull requests are welcome.
-
-For major changes:
-
-1. Fork repository
-2. Create feature branch
-3. Commit changes
-4. Push branch
-5. Open Pull Request
-
----
-
-# 📄 License
-
-This project is licensed under the MIT License.
-
----
-
-# 👨‍💻 Author
-
-Aditya Kumar
-
-Computer Science Student
-
-Full Stack Developer
-
-Machine Learning Enthusiast
-
----
-
-⭐ If you found this project useful, please give it a star on GitHub.
-
-```
-```
+This project is developed for educational and portfolio purposes.
