@@ -1,0 +1,45 @@
+```gitignore
+# Environment Variables
+.env
+
+# Python Cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual Environment
+venv/
+env/
+
+# Flask
+instance/
+.flaskenv
+
+# VS Code
+.vscode/
+
+# PyCharm
+.idea/
+
+# Logs
+*.log
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Temporary Files
+*.tmp
+*.temp
+
+# SQLite Databases
+*.db
+*.sqlite3
+
+# Uploads (optional)
+uploads/
+
+# Generated Reports (optional)
+reports/
+```

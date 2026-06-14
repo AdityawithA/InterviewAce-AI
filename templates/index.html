@@ -1,0 +1,885 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>InterviewAce AI</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- =========================
+         NAVBAR
+    ========================== -->
+
+    <nav class="navbar">
+
+        <div class="container">
+
+            <div class="logo">
+
+                <i class="fa-solid fa-robot"></i>
+
+                <span>InterviewAce AI</span>
+
+            </div>
+
+            <ul class="nav-links">
+
+                <li>
+                    <a href="#features">
+                        Features
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#how-it-works">
+                        How It Works
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#testimonials">
+                        Testimonials
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ url_for('login') }}"
+                       class="login-btn">
+                        Login
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ url_for('register') }}"
+                       class="register-btn">
+                        Get Started
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =========================
+         FLASH MESSAGES
+    ========================== -->
+
+    {% with messages =
+    get_flashed_messages(with_categories=true) %}
+
+    {% if messages %}
+
+    <div class="flash-container">
+
+        {% for category, message in messages %}
+
+        <div class="flash-message {{ category }}">
+
+            {{ message }}
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% endif %}
+
+    {% endwith %}
+
+
+    <!-- =========================
+         HERO SECTION
+    ========================== -->
+
+    <section class="hero">
+
+        <div class="hero-overlay"></div>
+
+        <div class="container hero-content">
+
+            <div class="hero-left">
+
+                <span class="hero-badge">
+
+                    🚀 AI Powered Interview Preparation
+
+                </span>
+
+                <h1>
+
+                    Practice Interviews.
+                    <br>
+
+                    Get AI Feedback.
+                    <br>
+
+                    Land Your Dream Job.
+
+                </h1>
+
+                <p>
+
+                    Improve your confidence with
+                    AI-generated mock interviews,
+                    real-time feedback,
+                    personalized reports,
+                    and performance analytics.
+
+                </p>
+
+                <div class="hero-buttons">
+
+                    <a href="{{ url_for('register') }}"
+                       class="btn-primary">
+
+                        Get Started
+
+                    </a>
+
+                    <a href="{{ url_for('login') }}"
+                       class="btn-secondary">
+
+                        Login
+
+                    </a>
+
+                </div>
+
+                <div class="hero-stats">
+
+                    <div class="stat-card">
+
+                        <h3>10K+</h3>
+
+                        <p>Interviews Taken</p>
+
+                    </div>
+
+                    <div class="stat-card">
+
+                        <h3>95%</h3>
+
+                        <p>User Satisfaction</p>
+
+                    </div>
+
+                    <div class="stat-card">
+
+                        <h3>24/7</h3>
+
+                        <p>AI Availability</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="hero-right">
+
+                <div class="hero-card">
+
+                    <div class="card-header">
+
+                        <span class="online-dot"></span>
+
+                        AI Interview Session
+
+                    </div>
+
+                    <div class="chat-message ai">
+
+                        Explain Event Delegation
+                        in JavaScript.
+
+                    </div>
+
+                    <div class="chat-message user">
+
+                        Event delegation allows
+                        handling events on parent
+                        elements using event bubbling.
+
+                    </div>
+
+                    <div class="score-box">
+
+                        <h3>AI Score</h3>
+
+                        <span>92/100</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- =========================
+         FEATURES SECTION
+    ========================== -->
+
+    <section id="features"
+             class="features">
+
+        <div class="container">
+
+            <div class="section-header">
+
+                <span>Features</span>
+
+                <h2>
+                    Everything You Need To
+                    Crack Interviews
+                </h2>
+
+                <p>
+                    Practice smarter with AI-driven
+                    interview preparation tools.
+                </p>
+
+            </div>
+
+            <div class="features-grid">
+
+                <div class="feature-card">
+
+                    <i class="fa-solid fa-brain"></i>
+
+                    <h3>
+                        AI Question Generator
+                    </h3>
+
+                    <p>
+                        Generate role-specific
+                        interview questions instantly
+                        using Gemini AI.
+                    </p>
+
+                </div>
+
+                <div class="feature-card">
+
+                    <i class="fa-solid fa-microphone"></i>
+
+                    <h3>
+                        Voice Interviews
+                    </h3>
+
+                    <p>
+                        Answer questions through
+                        your microphone and
+                        simulate real interviews.
+                    </p>
+
+                </div>
+
+                <div class="feature-card">
+
+                    <i class="fa-solid fa-chart-line"></i>
+
+                    <h3>
+                        Performance Analytics
+                    </h3>
+
+                    <p>
+                        Track scores, strengths,
+                        weaknesses and progress.
+                    </p>
+
+                </div>
+
+                <div class="feature-card">
+
+                    <i class="fa-solid fa-file-lines"></i>
+
+                    <h3>
+                        Detailed Reports
+                    </h3>
+
+                    <p>
+                        Receive AI-generated
+                        interview reports with
+                        actionable suggestions.
+                    </p>
+
+                </div>
+
+                <div class="feature-card">
+
+                    <i class="fa-solid fa-user-check"></i>
+
+                    <h3>
+                        Personalized Feedback
+                    </h3>
+
+                    <p>
+                        Improve communication,
+                        technical skills and
+                        confidence.
+                    </p>
+
+                </div>
+
+                <div class="feature-card">
+
+                    <i class="fa-solid fa-file-arrow-up"></i>
+
+                    <h3>
+                        Resume Analysis
+                    </h3>
+
+                    <p>
+                        Upload your resume and
+                        generate customized
+                        interview questions.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         HOW IT WORKS
+    ========================== -->
+
+    <section id="how-it-works"
+             class="how-it-works">
+
+        <div class="container">
+
+            <div class="section-header">
+
+                <span>How It Works</span>
+
+                <h2>
+                    Three Easy Steps
+                </h2>
+
+            </div>
+
+            <div class="steps-grid">
+
+                <div class="step-card">
+
+                    <div class="step-number">
+                        01
+                    </div>
+
+                    <h3>
+                        Select Interview Type
+                    </h3>
+
+                    <p>
+                        Choose your role,
+                        difficulty level and
+                        number of questions.
+                    </p>
+
+                </div>
+
+                <div class="step-card">
+
+                    <div class="step-number">
+                        02
+                    </div>
+
+                    <h3>
+                        Answer Questions
+                    </h3>
+
+                    <p>
+                        Respond through text
+                        or voice in a realistic
+                        interview environment.
+                    </p>
+
+                </div>
+
+                <div class="step-card">
+
+                    <div class="step-number">
+                        03
+                    </div>
+
+                    <h3>
+                        Get AI Feedback
+                    </h3>
+
+                    <p>
+                        Receive scores,
+                        strengths, weaknesses
+                        and suggestions.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         ACHIEVEMENTS
+    ========================== -->
+
+    <section class="achievements">
+
+        <div class="container">
+
+            <div class="achievement-grid">
+
+                <div class="achievement-card">
+
+                    <h2>50K+</h2>
+
+                    <p>
+                        Questions Generated
+                    </p>
+
+                </div>
+
+                <div class="achievement-card">
+
+                    <h2>15K+</h2>
+
+                    <p>
+                        Interview Reports
+                    </p>
+
+                </div>
+
+                <div class="achievement-card">
+
+                    <h2>5K+</h2>
+
+                    <p>
+                        Active Users
+                    </p>
+
+                </div>
+
+                <div class="achievement-card">
+
+                    <h2>97%</h2>
+
+                    <p>
+                        Improvement Rate
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         TESTIMONIALS
+    ========================== -->
+
+    <section id="testimonials"
+             class="testimonials">
+
+        <div class="container">
+
+            <div class="section-header">
+
+                <span>Testimonials</span>
+
+                <h2>
+                    Loved By Students
+                </h2>
+
+            </div>
+
+            <div class="testimonial-grid">
+
+                <div class="testimonial-card">
+
+                    <p>
+                        "The AI feedback was
+                        surprisingly accurate.
+                        It helped me prepare
+                        for my frontend interview."
+                    </p>
+
+                    <div class="user">
+
+                        <strong>
+                            Rahul Sharma
+                        </strong>
+
+                        <span>
+                            Frontend Developer
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="testimonial-card">
+
+                    <p>
+                        "The interview reports
+                        clearly showed where
+                        I was making mistakes."
+                    </p>
+
+                    <div class="user">
+
+                        <strong>
+                            Priya Gupta
+                        </strong>
+
+                        <span>
+                            Data Analyst
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="testimonial-card">
+
+                    <p>
+                        "Much better than random
+                        interview questions from
+                        the internet."
+                    </p>
+
+                    <div class="user">
+
+                        <strong>
+                            Arjun Singh
+                        </strong>
+
+                        <span>
+                            Full Stack Developer
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- =========================
+         FAQ SECTION
+    ========================== -->
+
+    <section class="faq">
+
+        <div class="container">
+
+            <div class="section-header">
+
+                <span>FAQ</span>
+
+                <h2>
+                    Frequently Asked Questions
+                </h2>
+
+            </div>
+
+            <div class="faq-container">
+
+                <div class="faq-item">
+
+                    <h3>
+                        Is InterviewAce AI free?
+                    </h3>
+
+                    <p>
+                        Yes. You can practice interviews
+                        and receive AI-generated feedback.
+                    </p>
+
+                </div>
+
+                <div class="faq-item">
+
+                    <h3>
+                        Can I practice technical interviews?
+                    </h3>
+
+                    <p>
+                        Yes. Frontend, Backend,
+                        Full Stack, Data Analyst,
+                        Machine Learning and HR
+                        interviews are supported.
+                    </p>
+
+                </div>
+
+                <div class="faq-item">
+
+                    <h3>
+                        Does it support voice interviews?
+                    </h3>
+
+                    <p>
+                        Yes. You can answer using
+                        your microphone for a more
+                        realistic interview experience.
+                    </p>
+
+                </div>
+
+                <div class="faq-item">
+
+                    <h3>
+                        Will I receive a report?
+                    </h3>
+
+                    <p>
+                        After every interview,
+                        a detailed AI-generated
+                        performance report is created.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         CALL TO ACTION
+    ========================== -->
+
+    <section class="cta">
+
+        <div class="container">
+
+            <div class="cta-card">
+
+                <h2>
+                    Ready To Ace Your Next Interview?
+                </h2>
+
+                <p>
+                    Start practicing today and
+                    improve your interview skills
+                    with personalized AI feedback.
+                </p>
+
+                <a href="{{ url_for('register') }}"
+                   class="btn-primary">
+
+                    Create Free Account
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer class="footer">
+
+        <div class="container">
+
+            <div class="footer-grid">
+
+                <div class="footer-column">
+
+                    <h3>
+                        InterviewAce AI
+                    </h3>
+
+                    <p>
+                        AI-powered interview preparation
+                        platform designed to help students
+                        and professionals succeed.
+                    </p>
+
+                </div>
+
+                <div class="footer-column">
+
+                    <h4>
+                        Quick Links
+                    </h4>
+
+                    <ul>
+
+                        <li>
+                            <a href="#features">
+                                Features
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#how-it-works">
+                                How It Works
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#testimonials">
+                                Testimonials
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+                <div class="footer-column">
+
+                    <h4>
+                        Account
+                    </h4>
+
+                    <ul>
+
+                        <li>
+                            <a href="{{ url_for('login') }}">
+                                Login
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{ url_for('register') }}">
+                                Register
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+                <div class="footer-column">
+
+                    <h4>
+                        Follow Us
+                    </h4>
+
+                    <div class="social-icons">
+
+                        <a href="#">
+                            <i class="fab fa-github"></i>
+                        </a>
+
+                        <a href="#">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+
+                        <a href="#">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+
+                        <a href="#">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+
+                <p>
+
+                    © 2026 InterviewAce AI.
+                    All Rights Reserved.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script>
+
+        // Auto-hide flash messages
+
+        setTimeout(() => {
+
+            const messages =
+                document.querySelectorAll(
+                    ".flash-message"
+                );
+
+            messages.forEach(msg => {
+
+                msg.style.opacity = "0";
+
+                setTimeout(() => {
+
+                    msg.remove();
+
+                }, 500);
+
+            });
+
+        }, 4000);
+
+    </script>
+
+</body>
+
+</html>
+

@@ -1,0 +1,511 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+
+        Profile | InterviewAce AI
+
+    </title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/profile.css') }}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+    <div class="profile-container">
+
+        <!-- =========================
+             HEADER
+        ========================== -->
+
+        <div class="profile-header">
+
+            <h1>
+
+                My Profile
+
+            </h1>
+
+            <p>
+
+                Manage your account and interview preferences.
+
+            </p>
+
+        </div>
+
+        <!-- =========================
+             PROFILE CARD
+        ========================== -->
+
+        <div class="report-card">
+
+            <div class="profile-info">
+
+                <div class="profile-avatar">
+
+                    <i class="fa-solid fa-user"></i>
+
+                </div>
+
+                <div>
+
+                    <h2>
+
+                        {{ user.full_name }}
+
+                    </h2>
+
+                    <p>
+
+                        {{ user.email }}
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- =========================
+             STATISTICS
+        ========================== -->
+
+        <div class="stats-grid">
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+
+                    <i class="fa-solid fa-briefcase"></i>
+
+                </div>
+
+                <div>
+
+                    <h2>
+
+                        {{ statistics.total_interviews }}
+
+                    </h2>
+
+                    <p>
+
+                        Interviews
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+
+                    <i class="fa-solid fa-trophy"></i>
+
+                </div>
+
+                <div>
+
+                    <h2>
+
+                        {{ statistics.highest_score }}
+
+                    </h2>
+
+                    <p>
+
+                        Highest Score
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+
+                    <i class="fa-solid fa-chart-line"></i>
+
+                </div>
+
+                <div>
+
+                    <h2>
+
+                        {{ statistics.average_score }}
+
+                    </h2>
+
+                    <p>
+
+                        Average Score
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- =========================
+             PROFILE FORMS
+        ========================== -->
+
+        <div class="analysis-grid">
+
+            <!-- =========================
+                 UPDATE PROFILE
+            ========================== -->
+
+            <div class="report-card">
+
+                <h2>
+
+                    Update Profile
+
+                </h2>
+
+                <form
+                    action="{{ url_for('update_profile') }}"
+                    method="POST">
+
+                    <div class="form-group">
+
+                        <label>
+
+                            Full Name
+
+                        </label>
+
+                        <input
+                            type="text"
+                            name="full_name"
+                            value="{{ user.full_name }}"
+                            required>
+
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="action-btn">
+
+                        <i class="fa-solid fa-floppy-disk"></i>
+
+                        Save Changes
+
+                    </button>
+
+                </form>
+
+            </div>
+
+            <!-- =========================
+                 CHANGE PASSWORD
+            ========================== -->
+
+            <div class="report-card">
+
+                <h2>
+
+                    Change Password
+
+                </h2>
+
+                <form
+                    action="{{ url_for('change_password') }}"
+                    method="POST">
+
+                    <div class="form-group">
+
+                        <label>
+
+                            Current Password
+
+                        </label>
+
+                        <input
+                            type="password"
+                            name="current_password"
+                            required>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>
+
+                            New Password
+
+                        </label>
+
+                        <input
+                            type="password"
+                            name="new_password"
+                            required>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>
+
+                            Confirm Password
+
+                        </label>
+
+                        <input
+                            type="password"
+                            name="confirm_password"
+                            required>
+
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="action-btn">
+
+                        <i class="fa-solid fa-key"></i>
+
+                        Change Password
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        <!-- =========================
+             RESUME UPLOAD
+        ========================== -->
+
+        <div class="report-card">
+
+            <h2>
+
+                Upload Resume
+
+            </h2>
+
+            <p>
+
+                Upload your resume and generate
+                personalized interview questions.
+
+            </p>
+
+            <form
+                action="{{ url_for('upload_resume') }}"
+                method="POST"
+                enctype="multipart/form-data">
+
+                <div class="form-group">
+
+                    <input
+                        type="file"
+                        name="resume"
+                        accept=".pdf,.doc,.docx"
+                        required>
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="action-btn">
+
+                    <i class="fa-solid fa-upload"></i>
+
+                    Upload Resume
+
+                </button>
+
+            </form>
+
+        </div>
+
+        <!-- =========================
+             QUICK ACTIONS
+        ========================== -->
+
+        <div class="report-card">
+
+            <h2>
+
+                Quick Actions
+
+            </h2>
+
+            <div class="profile-actions">
+
+                <a
+                    href="{{ url_for('dashboard') }}"
+                    class="action-btn">
+
+                    <i class="fa-solid fa-chart-line"></i>
+
+                    Dashboard
+
+                </a>
+
+                <a
+                    href="{{ url_for('history') }}"
+                    class="action-btn secondary">
+
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+
+                    Interview History
+
+                </a>
+
+                <a
+                    href="{{ url_for('logout') }}"
+                    class="action-btn danger">
+
+                    <i class="fa-solid fa-right-from-bracket"></i>
+
+                    Logout
+
+                </a>
+
+            </div>
+
+        </div>
+
+        <!-- =========================
+             ACCOUNT INFO
+        ========================== -->
+
+        <div class="report-card">
+
+            <h2>
+
+                Account Information
+
+            </h2>
+
+            <div class="account-info">
+
+                <div class="info-row">
+
+                    <span>
+
+                        Member Since
+
+                    </span>
+
+                    <strong>
+
+                        {{ user.created_at }}
+
+                    </strong>
+
+                </div>
+
+                <div class="info-row">
+
+                    <span>
+
+                        Registered Email
+
+                    </span>
+
+                    <strong>
+
+                        {{ user.email }}
+
+                    </strong>
+
+                </div>
+
+                <div class="info-row">
+
+                    <span>
+
+                        Account Status
+
+                    </span>
+
+                    <strong class="active-status">
+
+                        Active
+
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- =========================
+             FOOTER ACTIONS
+        ========================== -->
+
+        <div class="history-actions footer-actions">
+
+            <a
+                href="{{ url_for('dashboard') }}"
+                class="action-btn">
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Back to Dashboard
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- =========================
+         SIMPLE VALIDATION
+    ========================== -->
+
+    <script>
+
+        const passwordForms =
+            document.querySelectorAll(
+                "form"
+            );
+
+        passwordForms.forEach(
+            form =>
+            {
+                form.addEventListener(
+                    "submit",
+                    function()
+                    {
+                        console.log(
+                            "Form Submitted"
+                        );
+                    }
+                );
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>

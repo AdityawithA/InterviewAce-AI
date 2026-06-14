@@ -1,0 +1,915 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Dashboard | InterviewAce AI
+    </title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+    <!-- =========================
+         SIDEBAR
+    ========================== -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+
+            <i class="fa-solid fa-robot"></i>
+
+            <span>
+                InterviewAce
+            </span>
+
+        </div>
+
+        <ul class="sidebar-menu">
+
+            <li class="active">
+
+                <a href="{{ url_for('dashboard') }}">
+
+                    <i class="fa-solid fa-chart-line"></i>
+
+                    Dashboard
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="{{ url_for('history') }}">
+
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+
+                    History
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="{{ url_for('profile') }}">
+
+                    <i class="fa-solid fa-user"></i>
+
+                    Profile
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="{{ url_for('logout') }}">
+
+                    <i class="fa-solid fa-right-from-bracket"></i>
+
+                    Logout
+
+                </a>
+
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================== -->
+
+    <main class="main-content">
+
+        <!-- =========================
+             TOPBAR
+        ========================== -->
+
+        <header class="topbar">
+
+            <div>
+
+                <h2>
+
+                    Dashboard
+
+                </h2>
+
+                <p>
+
+                    Welcome back,
+                    {{ user.full_name }}
+
+                </p>
+
+            </div>
+
+            <div class="user-box">
+
+                <i class="fa-solid fa-user-circle"></i>
+
+                <span>
+
+                    {{ user.full_name }}
+
+                </span>
+
+            </div>
+
+        </header>
+
+        <!-- =========================
+             FLASH MESSAGES
+        ========================== -->
+
+        {% with messages =
+        get_flashed_messages(with_categories=true) %}
+
+        {% if messages %}
+
+        <div class="flash-container">
+
+            {% for category, message in messages %}
+
+            <div class="flash-message {{ category }}">
+
+                {{ message }}
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% endif %}
+
+        {% endwith %}
+
+        <!-- =========================
+             WELCOME BANNER
+        ========================== -->
+
+        <section class="welcome-banner">
+
+            <div class="banner-content">
+
+                <h1>
+
+                    AI Mock Interview Platform
+
+                </h1>
+
+                <p>
+
+                    Practice smarter, improve
+                    faster, and land your dream job.
+
+                </p>
+
+            </div>
+
+        </section>
+
+        <!-- =========================
+             STATISTICS
+        ========================== -->
+
+        <section class="stats-grid">
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+
+                    <i class="fa-solid fa-briefcase"></i>
+
+                </div>
+
+                <div>
+
+                    <h2>
+
+                        {{ statistics.total_interviews }}
+
+                    </h2>
+
+                    <p>
+
+                        Total Interviews
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+
+                    <i class="fa-solid fa-trophy"></i>
+
+                </div>
+
+                <div>
+
+                    <h2>
+
+                        {{ statistics.highest_score }}
+
+                    </h2>
+
+                    <p>
+
+                        Highest Score
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+
+                    <i class="fa-solid fa-chart-column"></i>
+
+                </div>
+
+                <div>
+
+                    <h2>
+
+                        {{ statistics.average_score }}
+
+                    </h2>
+
+                    <p>
+
+                        Average Score
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+
+                    <i class="fa-solid fa-user-check"></i>
+
+                </div>
+
+                <div>
+
+                    <h2>
+
+                        Active
+
+                    </h2>
+
+                    <p>
+
+                        Account Status
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- =========================
+             START INTERVIEW SECTION
+        ========================== -->
+
+        <section class="dashboard-grid">
+
+            <div class="interview-card">
+
+                <div class="card-header">
+
+                    <h2>
+
+                        Start New Interview
+
+                    </h2>
+
+                </div>
+
+                <form
+                    action="{{ url_for('start_interview') }}"
+                    method="POST"
+                    class="interview-form">
+
+                    <!-- Role -->
+
+                    <div class="form-group">
+
+                        <label>
+
+                            Interview Role
+
+                        </label>
+
+                        <select
+                            name="role"
+                            required>
+
+                            <option value="">
+
+                                Select Role
+
+                            </option>
+
+                            <option value="HR Interview">
+
+                                HR Interview
+
+                            </option>
+
+                            <option value="Frontend Developer">
+
+                                Frontend Developer
+
+                            </option>
+
+                            <option value="Backend Developer">
+
+                                Backend Developer
+
+                            </option>
+
+                            <option value="Full Stack Developer">
+
+                                Full Stack Developer
+
+                            </option>
+
+                            <option value="Data Analyst">
+
+                                Data Analyst
+
+                            </option>
+
+                            <option value="Machine Learning Engineer">
+
+                                Machine Learning Engineer
+
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <!-- Difficulty -->
+
+                    <div class="form-group">
+
+                        <label>
+
+                            Difficulty Level
+
+                        </label>
+
+                        <select
+                            name="difficulty"
+                            required>
+
+                            <option value="">
+
+                                Select Difficulty
+
+                            </option>
+
+                            <option value="Beginner">
+
+                                Beginner
+
+                            </option>
+
+                            <option value="Intermediate">
+
+                                Intermediate
+
+                            </option>
+
+                            <option value="Advanced">
+
+                                Advanced
+
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <!-- Question Count -->
+
+                    <div class="form-group">
+
+                        <label>
+
+                            Number of Questions
+
+                        </label>
+
+                        <select
+                            name="total_questions"
+                            required>
+
+                            <option value="5">
+
+                                5 Questions
+
+                            </option>
+
+                            <option value="10">
+
+                                10 Questions
+
+                            </option>
+
+                            <option value="15">
+
+                                15 Questions
+
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="start-btn">
+
+                        <i class="fa-solid fa-play"></i>
+
+                        Start Interview
+
+                    </button>
+
+                </form>
+
+            </div>
+
+            <!-- =========================
+                 QUICK INFO
+            ========================== -->
+
+            <div class="tips-card">
+
+                <div class="card-header">
+
+                    <h2>
+
+                        Interview Tips
+
+                    </h2>
+
+                </div>
+
+                <ul class="tips-list">
+
+                    <li>
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                        Read every question carefully.
+
+                    </li>
+
+                    <li>
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                        Give concise and clear answers.
+
+                    </li>
+
+                    <li>
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                        Use examples whenever possible.
+
+                    </li>
+
+                    <li>
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                        Practice regularly to improve.
+
+                    </li>
+
+                    <li>
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                        Review AI feedback after each session.
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             RECENT INTERVIEWS
+        ========================== -->
+
+        <section class="recent-interviews">
+
+            <div class="section-title">
+
+                <h2>
+
+                    Recent Interviews
+
+                </h2>
+
+            </div>
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Role
+                            </th>
+
+                            <th>
+                                Difficulty
+                            </th>
+
+                            <th>
+                                Score
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Date
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% if recent_interviews %}
+
+                            {% for interview in recent_interviews %}
+
+                            <tr>
+
+                                <td>
+
+                                    {{ interview.role }}
+
+                                </td>
+
+                                <td>
+
+                                    {{ interview.difficulty }}
+
+                                </td>
+
+                                <td>
+
+                                    {{ interview.score }}
+
+                                </td>
+
+                                <td>
+
+                                    <span class="status">
+
+                                        {{ interview.status }}
+
+                                    </span>
+
+                                </td>
+
+                                <td>
+
+                                    {{ interview.created_at }}
+
+                                </td>
+
+                            </tr>
+
+                            {% endfor %}
+
+                        {% else %}
+
+                            <tr>
+
+                                <td colspan="5">
+
+                                    No interviews found.
+
+                                </td>
+
+                            </tr>
+
+                        {% endif %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+        <!-- =========================
+             ANALYTICS SECTION
+        ========================== -->
+
+        <section class="charts-grid">
+
+            <!-- Performance Chart -->
+
+            <div class="chart-card">
+
+                <div class="card-header">
+
+                    <h2>
+
+                        Performance Trend
+
+                    </h2>
+
+                </div>
+
+                <canvas
+                    id="performanceChart">
+                </canvas>
+
+            </div>
+
+            <!-- Role Distribution -->
+
+            <div class="chart-card">
+
+                <div class="card-header">
+
+                    <h2>
+
+                        Role Distribution
+
+                    </h2>
+
+                </div>
+
+                <canvas
+                    id="roleChart">
+                </canvas>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- =========================
+         CHART JS
+    ========================== -->
+
+    <script>
+
+        // =========================
+        // PERFORMANCE CHART
+        // =========================
+
+        const performanceCtx =
+            document.getElementById(
+                "performanceChart"
+            );
+
+        new Chart(
+            performanceCtx,
+            {
+                type: "line",
+
+                data: {
+
+                    labels:
+                        {{ chart_labels|tojson }},
+
+                    datasets: [
+
+                        {
+
+                            label:
+                                "Interview Scores",
+
+                            data:
+                                {{ chart_scores|tojson }},
+
+                            borderColor:
+                                "#7c3aed",
+
+                            backgroundColor:
+                                "rgba(124,58,237,0.15)",
+
+                            fill: true,
+
+                            tension: 0.4,
+
+                            borderWidth: 3
+
+                        }
+
+                    ]
+
+                },
+
+                options: {
+
+                    responsive: true,
+
+                    plugins: {
+
+                        legend: {
+
+                            labels: {
+
+                                color: "#ffffff"
+
+                            }
+
+                        }
+
+                    },
+
+                    scales: {
+
+                        x: {
+
+                            ticks: {
+
+                                color: "#ffffff"
+
+                            }
+
+                        },
+
+                        y: {
+
+                            beginAtZero: true,
+
+                            max: 100,
+
+                            ticks: {
+
+                                color: "#ffffff"
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            }
+        );
+
+        // =========================
+        // ROLE DISTRIBUTION CHART
+        // =========================
+
+        const roleCtx =
+            document.getElementById(
+                "roleChart"
+            );
+
+        new Chart(
+            roleCtx,
+            {
+                type: "doughnut",
+
+                data: {
+
+                    labels:
+                        {{ role_labels|tojson }},
+
+                    datasets: [
+
+                        {
+
+                            data:
+                                {{ role_counts|tojson }},
+
+                            backgroundColor: [
+
+                                "#7c3aed",
+                                "#4f46e5",
+                                "#06b6d4",
+                                "#22c55e",
+                                "#f59e0b",
+                                "#ef4444"
+
+                            ],
+
+                            borderWidth: 0
+
+                        },
+
+                    ]
+
+                },
+
+                options: {
+
+                    responsive: true,
+
+                    plugins: {
+
+                        legend: {
+
+                            position: "bottom",
+
+                            labels: {
+
+                                color: "#ffffff"
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            },
+        );
+
+        // =========================
+        // AUTO HIDE FLASH
+        // =========================
+
+        setTimeout(() => {
+
+            const messages =
+                document.querySelectorAll(
+                    ".flash-message"
+                );
+
+            messages.forEach(msg => {
+
+                msg.style.opacity = "0";
+
+                setTimeout(() => {
+
+                    msg.remove();
+
+                }, 500);
+
+            });
+
+        }, 4000);
+
+    </script>
+
+</body>
+
+</html>
+

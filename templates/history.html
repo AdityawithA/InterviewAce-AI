@@ -1,0 +1,442 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+
+        Interview History | InterviewAce AI
+
+    </title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/history.css') }}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+    <div class="history-container">
+
+        <!-- =========================
+             HEADER
+        ========================== -->
+
+        <div class="history-header">
+
+            <h1>
+
+                Interview History
+
+            </h1>
+
+            <p>
+
+                View and manage all your previous interviews.
+
+            </p>
+
+        </div>
+
+        <!-- =========================
+             ACTION BAR
+        ========================== -->
+
+        <div class="history-actions">
+
+            <a
+                href="{{ url_for('dashboard') }}"
+                class="action-btn">
+
+                <i class="fa-solid fa-house"></i>
+
+                Dashboard
+
+            </a>
+
+            <a
+                href="{{ url_for('profile') }}"
+                class="action-btn secondary">
+
+                <i class="fa-solid fa-user"></i>
+
+                Profile
+
+            </a>
+
+        </div>
+
+        <!-- =========================
+             FILTER SECTION
+        ========================== -->
+
+        <div class="report-card">
+
+            <div class="filter-grid">
+
+                <div>
+
+                    <label>
+
+                        Search Role
+
+                    </label>
+
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Frontend Developer">
+
+                </div>
+
+                <div>
+
+                    <label>
+
+                        Status
+
+                    </label>
+
+                    <select id="statusFilter">
+
+                        <option value="">
+
+                            All
+
+                        </option>
+
+                        <option value="Completed">
+
+                            Completed
+
+                        </option>
+
+                        <option value="In Progress">
+
+                            In Progress
+
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- =========================
+             HISTORY TABLE
+        ========================== -->
+
+        <div class="report-card">
+
+            <h2>
+
+                Previous Interviews
+
+            </h2>
+
+            <div class="table-wrapper">
+
+                <table
+                    id="historyTable"
+                    class="report-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+
+                                Role
+
+                            </th>
+
+                            <th>
+
+                                Difficulty
+
+                            </th>
+
+                            <th>
+
+                                Score
+
+                            </th>
+
+                            <th>
+
+                                Status
+
+                            </th>
+
+                            <th>
+
+                                Date
+
+                            </th>
+
+                            <th>
+
+                                Actions
+
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% if interviews %}
+
+                            {% for interview in interviews %}
+
+                            <tr>
+
+                                <td>
+
+                                    {{ interview.role }}
+
+                                </td>
+
+                                <td>
+
+                                    {{ interview.difficulty }}
+
+                                </td>
+
+                                <td>
+
+                                    <span class="score-badge">
+
+                                        {{ interview.score }}
+
+                                    </span>
+
+                                </td>
+
+                                <td>
+
+                                    {% if interview.status == 'Completed' %}
+
+                                    <span class="status completed">
+
+                                        Completed
+
+                                    </span>
+
+                                    {% else %}
+
+                                    <span class="status pending">
+
+                                        In Progress
+
+                                    </span>
+
+                                    {% endif %}
+
+                                </td>
+
+                                <td>
+
+                                    {{ interview.created_at }}
+
+                                </td>
+
+                                <td>
+
+                                    <div class="action-group">
+
+                                        {% if interview.status == 'Completed' %}
+
+                                        <a
+                                            href="{{ url_for('report', interview_id=interview.id) }}"
+                                            class="table-btn">
+
+                                            <i class="fa-solid fa-file-lines"></i>
+
+                                            Report
+
+                                        </a>
+
+                                        {% endif %}
+
+                                        <form
+                                            action="{{ url_for('delete_interview', interview_id=interview.id) }}"
+                                            method="POST"
+                                            onsubmit="return confirm('Delete this interview?')">
+
+                                            <button
+                                                type="submit"
+                                                class="table-btn danger">
+
+                                                <i class="fa-solid fa-trash"></i>
+
+                                                Delete
+
+                                            </button>
+
+                                        </form>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+
+                            {% endfor %}
+
+                        {% else %}
+
+                            <tr>
+
+                                <td colspan="6">
+
+                                    No interview history found.
+
+                                </td>
+
+                            </tr>
+
+                        {% endif %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+        <!-- =========================
+             FOOTER ACTIONS
+        ========================== -->
+
+        <div class="history-actions footer-actions">
+
+            <a
+                href="{{ url_for('dashboard') }}"
+                class="action-btn">
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Back to Dashboard
+
+            </a>
+
+            <a
+                href="{{ url_for('profile') }}"
+                class="action-btn secondary">
+
+                <i class="fa-solid fa-user"></i>
+
+                Profile
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- =========================
+         FILTER SCRIPT
+    ========================== -->
+
+    <script>
+
+        const searchInput =
+            document.getElementById(
+                "searchInput"
+            );
+
+        const statusFilter =
+            document.getElementById(
+                "statusFilter"
+            );
+
+        const tableRows =
+            document.querySelectorAll(
+                "#historyTable tbody tr"
+            );
+
+        function filterTable()
+        {
+            const searchValue =
+                searchInput.value
+                .toLowerCase();
+
+            const statusValue =
+                statusFilter.value
+                .toLowerCase();
+
+            tableRows.forEach(
+                row =>
+                {
+                    const role =
+                        row.cells[0]
+                        ?.textContent
+                        .toLowerCase()
+                        || "";
+
+                    const status =
+                        row.cells[3]
+                        ?.textContent
+                        .toLowerCase()
+                        || "";
+
+                    const roleMatch =
+                        role.includes(
+                            searchValue
+                        );
+
+                    const statusMatch =
+                        statusValue === ""
+                        ||
+                        status.includes(
+                            statusValue
+                        );
+
+                    if(
+                        roleMatch &&
+                        statusMatch
+                    )
+                    {
+                        row.style.display =
+                            "";
+                    }
+                    else
+                    {
+                        row.style.display =
+                            "none";
+                    }
+                }
+            );
+        }
+
+        searchInput.addEventListener(
+            "keyup",
+            filterTable
+        );
+
+        statusFilter.addEventListener(
+            "change",
+            filterTable
+        );
+
+    </script>
+
+</body>
+
+</html>
+
